@@ -1,0 +1,213 @@
+Source: open-vm-tools
+Section: admin
+Priority: extra
+Maintainer: George Grindlinger <gmg128@oit.rutgers.edu>
+XSBC-Original-Maintainer: Bernd Zeimetz <bzed@debian.org>
+Build-Depends:
+ debhelper (>= 9), autotools-dev, doxygen, libcunit1-dev,
+ libdumbnet-dev, libfuse-dev, libgtk2.0-dev, libgtkmm-2.4-dev,
+ libicu-dev, libnotify-dev, libpam0g-dev, libx11-dev,
+ libxinerama-dev, libxss-dev, libxtst-dev, dh-autoreconf,
+ libmspack-dev, libssl-dev, libxml-security-c-dev, libxml2-dev,
+ libxmlsec1-dev, xmlsec1
+Standards-Version: 3.9.5
+Homepage: http://open-vm-tools.sourceforge.net/
+Vcs-Git: https://github.com/bzed/pkg-open-vm-tools.git
+Vcs-Browser: https://github.com/bzed/pkg-open-vm-tools
+
+Package: open-vm-tools
+Architecture: amd64 i386
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Recommends: ethtool, zerofree
+Suggests: open-vm-tools-desktop
+Breaks: open-vm-toolbox (<= 2:9.4.0-1280544-5),
+ open-vm-tools-lts-trusty (<< 2:9.4.0-1280544-5ubuntu6.1),
+ open-vm-dkms-lts-trusty (<<2:9.4.0-1280544-5ubuntu6.1),
+ open-vm-tools-lts-trusty-dkms (<< 2:9.4.0-1280544-5ubuntu6.1)
+Conflicts: open-vm-dkms (<< 2:9.4.0-1280544-5ubuntu3), open-vm-tools-dkms (<< 2:9.4.0-1280544-5ubuntu3)
+Replaces: open-vm-dkms,
+ open-vm-tools-dkms,
+ open-vm-toolbox (<= 2:9.4.0-1280544-5),
+ open-vm-tools-lts-trusty (<< 2:9.4.0-1280544-5ubuntu6.1),
+ open-vm-dkms-lts-trusty (<< 2:9.4.0-1280544-5ubuntu6.1),
+ open-vm-tools-lts-trusty-dkms (<< 2:9.4.0-1280544-5ubuntu6.1)
+Description: Open VMware Tools for virtual machines hosted on VMware (CLI)
+ The Open Virtual Machine Tools (open-vm-tools) project is an open source
+ implementation of VMware Tools. It is a suite of virtualization utilities and
+ drivers to improve the functionality, user experience and administration of
+ VMware virtual machines.
+ .
+ This package contains only the core user-space programs and libraries.
+
+Package: open-vm-tools-desktop
+Architecture: amd64 i386
+Depends: ${misc:Depends}, ${shlibs:Depends}, open-vm-tools (= ${binary:Version})
+Recommends:
+ xauth, xserver-xorg-input-vmmouse,
+ xserver-xorg-video-vmware
+Suggests: xdg-utils
+Conflicts: open-vm-toolbox (<< 2:9.2.3-1031360-2~)
+Breaks: open-vm-toolbox-lts-trusty (<< 2:9.4.0-1280544-5ubuntu6.1),
+ open-vm-tools-lts-trusty-desktop (<< 2:9.4.0-1280544-5ubuntu6.1)
+Replaces: open-vm-toolbox,
+ open-vm-toolbox-lts-trusty (<< 2:9.4.0-1280544-5ubuntu6.1),
+ open-vm-tools-lts-trusty-desktop (<< 2:9.4.0-1280544-5ubuntu6.1)
+Description: Open VMware Tools for virtual machines hosted on VMware (GUI)
+ The Open Virtual Machine Tools (open-vm-tools) project is an open source
+ implementation of VMware Tools. It is a suite of virtualization utilities and
+ drivers to improve the functionality, user experience and administration of
+ VMware virtual machines.
+ .
+ This package contains the user-space programs and libraries that are essential
+ for improved user experience of VMware virtual machines.
+
+Package: open-vm-tools-dev
+Section: devel
+Architecture: all
+Depends: ${misc:Depends}
+Breaks: open-vm-tools-lts-trusty-dev (<< 2:9.4.0-1280544-5ubuntu6.1)
+Replaces: open-vm-tools-lts-trusty-dev (<< 2:9.4.0-1280544-5ubuntu6.1)
+Description: Open VMware Tools for virtual machines hosted on VMware (development)
+ The Open Virtual Machine Tools (open-vm-tools) project is an open source
+ implementation of VMware Tools. It is a suite of virtualization utilities and
+ drivers to improve the functionality, user experience and administration of
+ VMware virtual machines.
+ .
+ This package contains the development files.
+
+Package: open-vm-tools-dbg
+Section: debug
+Priority: extra
+Architecture: amd64 i386
+Depends: ${misc:Depends}, open-vm-tools (= ${binary:Version}), open-vm-tools-desktop (= ${binary:Version})
+Breaks: open-vm-tools-lts-trusty-dbg (<< 2:9.4.0-1280544-5ubuntu6.1)
+Replaces: open-vm-tools-lts-trusty-dbg (<< 2:9.4.0-1280544-5ubuntu6.1)
+Description: Open VMware Tools for virtual machines hosted on VMware (debug)
+ The Open Virtual Machine Tools (open-vm-tools) project is an open source
+ implementation of VMware Tools. It is a suite of virtualization utilities and
+ drivers to improve the functionality, user experience and administration of
+ VMware virtual machines.
+ .
+ This package contains the debugging symbols.
+
+Package: open-vm-tools-dkms
+Architecture: all
+Section: oldlibs
+Priority: extra
+Depends: ${misc:Depends}, open-vm-tools (>= 2:9.4.0-1280544-5ubuntu3)
+Conflicts: open-vm-dkms (<< 2:9.2.3-1031360-2~)
+Replaces: open-vm-dkms
+Description: Open VMware Tools for virtual machines hosted on VMware (transitional package)
+ Package to ease upgrading from older open-vm-tools-dkms packages.  Drivers
+ from this package are now provided in the kernel or have been deprecated.
+ .
+ This package can be purged at any time.
+
+Package: open-vm-dkms
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends: ${misc:Depends}, open-vm-tools-dkms
+Description: Open VMware Tools for virtual machines hosted on VMware (transitional package)
+ Package to ease upgrading from older open-vm-dkms packages to the new
+ open-vm-tools-dkms package.
+ .
+ This package can be purged at anytime once the open-vm-tools-dkms package has
+ been installed.
+
+Package: open-vm-toolbox
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends: ${misc:Depends}, open-vm-tools-desktop
+Description: Open VMware Tools for virtual machines hosted on VMware (transitional package)
+ Package to ease upgrading from older open-vm-toolbox packages to the new
+ open-vm-tools-desktop package.
+ .
+ This package can be purged at anytime once the open-vm-tools-desktop package
+ has been installed.
+
+Package: open-vm-dkms-lts-trusty
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends: ${misc:Depends}, open-vm-tools
+Description: Open VMware Tools for virtual machines hosted on VMware (transitional package)
+ Package to ease upgrading from older open-vm-dkms-lts-trusty packages to
+ the new open-vm-tools package.
+ .
+ This package can be purged at anytime once the open-vm-tools
+ package has been installed.
+
+Package: open-vm-toolbox-lts-trusty
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends: ${misc:Depends}, open-vm-tools-desktop
+Description: Open VMware Tools for virtual machines hosted on VMware (transitional package)
+ Package to ease upgrading from older open-vm-toolbox-lts-trusty
+ packages to the new open-vm-tools-desktop package.
+ .
+ This package can be purged at anytime once the open-vm-tools-desktop
+ package has been installed.
+
+Package: open-vm-tools-lts-trusty
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends: ${misc:Depends}, open-vm-tools
+Description: Open VMware Tools for virtual machines hosted on VMware (transitional package)
+ Package to ease upgrading from older open-vm-tools-lts-trusty
+ packages to the new open-vm-tools package.
+ .
+ This package can be purged at anytime once the open-vm-tools
+ package has been installed.
+
+Package: open-vm-tools-lts-trusty-dbg
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends: ${misc:Depends}, open-vm-tools-dbg
+Description: Open VMware Tools for virtual machines hosted on VMware (transitional package)
+ Package to ease upgrading from older open-vm-tools-lts-trusty-dbg 
+ packages to the new open-vm-tools-dbg package.
+ .
+ This package can be purged at anytime once the open-vm-tools-dbg
+ package has been installed.
+
+Package: open-vm-tools-lts-trusty-desktop
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends: ${misc:Depends}, open-vm-tools-desktop
+Description: Open VMware Tools for virtual machines hosted on VMware (transitional package)
+ Package to ease upgrading from older open-vm-tools-lts-trusty-desktop
+ packages to the new open-vm-tools-desktop package.
+ .
+ This package can be purged at anytime once the open-vm-tools-desktop
+ package has been installed.
+
+Package: open-vm-tools-lts-trusty-dev
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends: ${misc:Depends}, open-vm-tools-dev
+Description: Open VMware Tools for virtual machines hosted on VMware (transitional package)
+ Package to ease upgrading from older open-vm-tools-lts-trusty-dev
+ packages to the new open-vm-tools-dev package.
+ .
+ This package can be purged at anytime once the open-vm-tools-dev
+ package has been installed.
+
+Package: open-vm-tools-lts-trusty-dkms
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends: ${misc:Depends}, open-vm-tools
+Description: Open VMware Tools for virtual machines hosted on VMware (transitional package)
+ Package to ease upgrading from older open-vm-tools-lts-trusty-dkms
+ packages to the new open-vm-tools package.
+ .
+ This package can be purged at anytime once the open-vm-tools
+ package has been installed.
+
