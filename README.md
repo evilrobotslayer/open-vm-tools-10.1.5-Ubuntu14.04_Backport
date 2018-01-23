@@ -1,3 +1,7 @@
+You can obtain the pre-built binary package (open-vm-tools) from my PPA:
+https://launchpad.net/~vinator/+archive/ubuntu/trusty
+
+Changelog:
 open-vm-tools (2:10.1.5-5055683-1.00ubuntu14.04~vinator) trusty; urgency=medium
 
   * Attempt to backport 10.1.5 from zesty using trusty's 9.4.0 packaging
